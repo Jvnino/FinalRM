@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO.Ports;
 using UnityEngine.UI;
+using System.Threading;
 
 public class ComController : MonoBehaviour
 {
@@ -20,6 +21,10 @@ public class ComController : MonoBehaviour
     int lastKey = -1;
     int totalFps = 0;
     int sensorFps = 0;
+
+    //VER SI SE OPTIMIZA
+    Thread serialThread;
+    bool keepReading = true;
 
     // Start is called before the first frame update
     void Start()
@@ -73,11 +78,44 @@ public class ComController : MonoBehaviour
 
     }
 
+    //VER SI SE OPTIMIZA X2
+    void ReadSerial()
+    {
+        while (keepReading && spCom != null && spCom.IsOpen)
+        {
+            try
+            {
+                string s = spCom.ReadLine();
+                int value;
+                if (int.TryParse(s, out value))
+                {
+                    lock (this)
+                    {
+                        rx = value;
+                    }
+                }
+            }
+            catch
+            {
+                // Handle read exceptions
+            }
+        }
+    }
+
+
     // Update is called once per frame
     void Update()
     {
         if (gameController.gameStatus < 0)
             return;
+
+        //OTRA OPTIMIZACION
+        int currentRx;
+        lock (this)
+        {
+            currentRx = rx;
+        }
+        //AAAAAA
         if (spCom.IsOpen)
         {
             string s = spCom.ReadLine();
@@ -124,4 +162,17 @@ public class ComController : MonoBehaviour
         }
     }
 
+    //MAS OPT9IMIZAICON
+    void OnApplicationQuit()
+    {
+        keepReading = false;
+        if (serialThread != null && serialThread.IsAlive)
+        {
+            serialThread.Join();
+        }
+        if (spCom != null && spCom.IsOpen)
+        {
+            spCom.Close();
+        }
+    }
 }

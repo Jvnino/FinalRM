@@ -12,7 +12,6 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     public GameObject beginLayer;
-    public GameObject blackLayer;
     public GameObject whiteBlock;
     public GameObject gameLayer;
 
@@ -102,14 +101,12 @@ public class GameController : MonoBehaviour
     // show black screen
     public void ShowBlackScreen()
     {
-        blackLayer.SetActive(true);
         whiteBlock.SetActive(true);
     }
 
     // hide black screen
     public void HideBlackScreen()
     {
-        blackLayer.SetActive(false);
         whiteBlock.SetActive(false);
 
     }
@@ -117,7 +114,6 @@ public class GameController : MonoBehaviour
     // trigger press begin
     public void ShootBegin()
     {
-        blackLayer.SetActive(true);
         whiteBlock.SetActive(false);
         GetComponent<AudioSource>().clip = audioArr[0];
         GetComponent<AudioSource>().Play();
@@ -144,6 +140,16 @@ public class GameController : MonoBehaviour
     }
     // Update is called once per frame
     float eTime = 0;
+    
+    public void resume()
+    {
+        if (isPaused)
+        {
+            Time.timeScale = 1f;
+            GamePaused.SetActive(false);
+            Background.SetActive(true);
+        }
+    }
     void Update()
     {
         // Check if the "P" key is pressed to pause/resume the game
@@ -166,6 +172,7 @@ public class GameController : MonoBehaviour
                 Background.SetActive(true);
             }
         }
+
 
         // Skip the rest of the update if the game is paused
         if (isPaused || gameStatus < 0)

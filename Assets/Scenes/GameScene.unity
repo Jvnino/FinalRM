@@ -1274,7 +1274,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 531429860}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1430,7 +1430,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &579806638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2959,7 +2959,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1254721429}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0019196272, y: 0.034201443, z: -9.224085}
+  m_LocalPosition: {x: 0.0019196272, y: 0.034201443, z: -5.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4436,7 +4436,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   beginLayer: {fileID: 962275258}
-  blackLayer: {fileID: 969025695}
   whiteBlock: {fileID: 531429860}
   gameLayer: {fileID: 68034320}
   Background: {fileID: 1368311236}
@@ -4640,7 +4639,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1751227877}
         m_TargetAssemblyTypeName: GameController, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: resume
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
